@@ -1,4 +1,5 @@
 import numpy as np
+from rat_class import Rat
 
 
 def random_action():
@@ -28,6 +29,7 @@ def update_Qtable(q_table, state, action, reward, next_state):
 max_number_of_steps = 5
 num_episodes = 10
 q_table = np.zeros((2,2))
+env = Rat()
 
 for episode in range(num_episodes):
     state = 0
@@ -35,7 +37,7 @@ for episode in range(num_episodes):
 
     for t in range(max_number_of_steps):
         action = get_action(state, episode)
-        next_state, reward = step(state, action)
+        next_state, reward = env.step(action)
         print(state, action, reward)
         episode_reward += reward
         q_table = update_Qtable(q_table, state, action, reward, next_state)
